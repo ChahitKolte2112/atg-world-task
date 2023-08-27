@@ -19,8 +19,9 @@ function App() {
             <div className="d-none d-lg-block d-xl-block d-xxl-block d-xxl-block">
                 <Navbar></Navbar>
             </div>
-
-            <Banner></Banner>
+            <div>
+                <Banner />
+            </div>
             <div className="mt-4">
                 <div className="d-flex navbar_padding align-items-center justify-content-between pb-3">
                     <div>

@@ -14,35 +14,33 @@ const Navbar = () => {
                         alt=""
                         className="navbar-brand logo_size"
                     />
-                    <button
-                        className="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation"
-                    >
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
 
-                    <div className="search-bar p-0 border rounded bg-light">
-                        <div className="input-group mb-3 align-content-center p-0 border border-0 mx-auto">
-                            <span
-                                className="input-group-text bg-transparent border-0 pe-2"
-                                id="basic-addon1"
-                            >
-                                <img src={search_icon} alt="" />
-                            </span>
-                            <input
-                                type="text"
-                                className="form-control border-0 bg-light ps-2"
-                                placeholder="Search for your favourite groups in ATG"
-                                aria-label="Username"
-                                aria-describedby="basic-addon1"
-                            />
-                        </div>
-                    </div>
+                    <nav class="navbar  ">
+                        <form
+                            class="container-fluid"
+                            style={{
+                                border: "1px solid grey",
+                                borderRadius: "25px",
+                                width: "350px",
+                            }}
+                        >
+                            <div class="input-group">
+                                <span
+                                    className="input-group-text bg-transparent border-0 rounded-4 pe-2 overflow-hidden"
+                                    id="basic-addon1"
+                                >
+                                    <img src={search_icon} alt="" />
+                                </span>
+                                <input
+                                    type="text"
+                                    className="form-control navbar-input"
+                                    placeholder="Search for your group in ATG"
+                                    aria-label="Username"
+                                    aria-describedby="basic-addon1"
+                                />
+                            </div>
+                        </form>
+                    </nav>
                     <div
                         className="justify-content-end"
                         id="navbarSupportedContent"
