@@ -3,8 +3,15 @@ import atg_world from "../../assets/argworld_logo.png";
 import search_icon from "../../assets/search_icon.png";
 import LoginModal from "../LoginModal/LoginModal";
 import "./Navbar.css";
+import profileuser from "../../assets/profileuser.png";
+import { dataActions } from "../../redux/dataSlice";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+    const data = useSelector((state) => state.details.data);
+    console.log(data);
+    const dispatch = useDispatch();
     return (
         <div className="navbar_padding">
             <nav className="navbar navbar-expand-lg">
@@ -47,17 +54,54 @@ const Navbar = () => {
                     >
                         <ul className="navbar-nav mb-2 mb-lg-0">
                             <li className="nav-item dropdown fw-bold">
-                                <button
-                                    type="button"
-                                    class="btn nav-a dropdown-toggle text-decoration-none text-black fw-bold"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal"
-                                >
-                                    Create account.{" "}
-                                    <span className="text-primary">
-                                        It's free
-                                    </span>
-                                </button>
+                                {!data && (
+                                    <button
+                                        type="button"
+                                        class="btn nav-a dropdown-toggle text-decoration-none text-black fw-bold"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal"
+                                    >
+                                        Create account.{" "}
+                                        <span className="text-primary">
+                                            It's free
+                                        </span>
+                                    </button>
+                                )}
+                                {data && (
+                                    <div
+                                        style={{
+                                            display: "flex",
+                                            backgroundColor: "transparent",
+
+                                            alignItems: "center",
+                                        }}
+                                    >
+                                        <img
+                                            src={profileuser}
+                                            style={{
+                                                width: "40px",
+                                                height: "40px",
+                                                margin: "5px",
+                                            }}
+                                            alt="profile"
+                                        />
+                                        <h4 style={{ margin: "5px" }}>
+                                            {data.firstname}
+                                        </h4>
+                                        <button
+                                            className="rounded-2"
+                                            type="button"
+                                            style={{cursor:"pointer"}}
+                                            onClick={() => {
+                                                dispatch(
+                                                    dataActions.deletedata()
+                                                );
+                                            }}
+                                        >
+                                            Logout
+                                        </button>
+                                    </div>
+                                )}
                                 <ul className="dropdown-menu">
                                     <li>
                                         <a className="dropdown-item">Action</a>

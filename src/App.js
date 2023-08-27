@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import Banner from "./components/Banner/Banner";
@@ -12,16 +11,15 @@ import EducationCard from "./components/EducationCard/EducationCard";
 import Meetup from "./components/Meetup/Meetup";
 import JobCard from "./components/JobCard/JobCard";
 import RecommendedGroups from "./components/RecommendedGroups/RecommendedGroups";
-
+import { useSelector } from "react-redux";
 function App() {
+    const data = useSelector((state) => state.details.data);
     return (
         <div className="App">
             <div className="d-none d-lg-block d-xl-block d-xxl-block d-xxl-block">
                 <Navbar></Navbar>
             </div>
-            <div>
-                <Banner />
-            </div>
+            <div>{!data && <Banner />}</div>
             <div className="mt-4">
                 <div className="d-flex navbar_padding align-items-center justify-content-between pb-3">
                     <div>

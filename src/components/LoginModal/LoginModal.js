@@ -3,10 +3,39 @@ import login_image from "../../assets/login_image.png";
 import "./LoginModal.css";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
-import SigninModal from "../SigninModal";
-
-const LoginModal = (props) => {
+import { dataActions } from "../../redux/dataSlice";
+import { useDispatch } from "react-redux";
+const LoginModal = () => {
+    const dispatch = useDispatch();
     const [signIn, setSignIn] = useState(false);
+    const [formdata, setFormData] = useState({
+        firstname: "",
+        lastname: "",
+        email: "",
+        password: "",
+    });
+    const changeHandler = (e) => {
+        setFormData({ ...formdata, [e.target.name]: e.target.value });
+    };
+    const submitHandler = (e) => {
+        e.preventDefault();
+        if (
+            formdata.firstname &&
+            formdata.lastname &&
+            formdata.password &&
+            formdata.confirmpassword &&
+            formdata.email
+        ) {
+            dispatch(dataActions.adddata(formdata));
+            setFormData({
+                firstname: "",
+                lastname: "",
+                email: "",
+                password: "",
+                confirmpassword: "",
+            });
+        }
+    };
     return (
         <div>
             <div
@@ -42,55 +71,71 @@ const LoginModal = (props) => {
                                         ? "Signin"
                                         : "CreateAccount"}
                                 </h1>
-                                {!signIn === true ? (
-                                    <div className="input-group mb-1">
-                                        <input
-                                            type="text"
-                                            aria-label="First name"
-                                            className="form-control py-3 bg-light"
-                                            placeholder="First Name"
-                                        />
+                                <form onSubmit={submitHandler}>
+                                    {!signIn === true ? (
+                                        <div className="input-group mb-1">
+                                            <input
+                                                type="text"
+                                                aria-label="First name"
+                                                className="form-control py-3 bg-light"
+                                                placeholder="First Name"
+                                                name="firstname"
+                                                onChange={changeHandler}
+                                                value={formdata.firstname}
+                                            />
+                                            <input
+                                                type="text"
+                                                aria-label="Last name"
+                                                className="form-control py-3 bg-light"
+                                                placeholder="Last Name"
+                                                name="lastname"
+                                                onChange={changeHandler}
+                                                value={formdata.lastname}
+                                            />
+                                        </div>
+                                    ) : (
+                                        <></>
+                                    )}
+                                    <input
+                                        type="text"
+                                        aria-label="Last name"
+                                        className="form-control py-3 mb-1 bg-light"
+                                        placeholder="Email"
+                                        name="email"
+                                        onChange={changeHandler}
+                                        value={formdata.email}
+                                    />
+                                    <input
+                                        type="text"
+                                        aria-label="Last name"
+                                        className="form-control py-3 mb-1 bg-light"
+                                        placeholder="Password"
+                                        name="password"
+                                        onChange={changeHandler}
+                                        value={formdata.password}
+                                    />
+                                    {!signIn ? (
                                         <input
                                             type="text"
                                             aria-label="Last name"
                                             className="form-control py-3 bg-light"
-                                            placeholder="Last Name"
+                                            placeholder="Confirm Password"
+                                            name="confirmpassword"
+                                            onChange={changeHandler}
+                                            value={formdata.confirmpassword}
                                         />
-                                    </div>
-                                ) : (
-                                    <></>
-                                )}
-                                <input
-                                    type="text"
-                                    aria-label="Last name"
-                                    className="form-control py-3 mb-1 bg-light"
-                                    placeholder="Email"
-                                />
-                                <input
-                                    type="text"
-                                    aria-label="Last name"
-                                    className="form-control py-3 mb-1 bg-light"
-                                    placeholder="Password"
-                                />
-                                {!signIn ? (
-                                    <input
-                                        type="text"
-                                        aria-label="Last name"
-                                        className="form-control py-3 bg-light"
-                                        placeholder="Confirm Password"
-                                    />
-                                ) : (
-                                    <></>
-                                )}
-                                <button
-                                    type="button"
-                                    class="btn btn-primary w-100 mt-3 rounded-pill"
-                                    data-bs-dismiss="modal"
-                                >
-                                    {signIn === true
-                                        ? "Signin"
-                                        : "CreateAccount"}
-                                </button>
+                                    ) : (
+                                        <></>
+                                    )}
+                                    <button
+                                        type="submit"
+                                        class="btn btn-primary w-100 mt-3 rounded-pill"
+                                    >
+                                        {signIn === true
+                                            ? "Signin"
+                                            : "CreateAccount"}
+                                    </button>
+                                </form>
                                 <button
                                     type="button"
                                     class="btn btn-outline-dark w-100 mt-3 rounded-pill"
