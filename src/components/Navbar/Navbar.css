@@ -1,0 +1,14 @@
+.logo_size {
+    /* height: 24px; */
+    width: 162.57px;
+}
+
+.navbar_padding {
+    padding: 24px 72px;
+}
+
+.search-bar {
+    width: 360px;
+    height: 42px;
+    padding: 12px 68px 12px 50px;
+}
